@@ -1,25 +1,29 @@
-# Banking Service 
+<!-- ============================================ -->
+<!-- PROJECT HEADER -->
+<!-- ============================================ -->
 
-<!-- Brief description -->
-This repository contains an implementation of the **Banking Service** technical test provided by Skypay.
+# Banking Service – Technical Test
 
-<!-- List of features/operations that the solution provides -->
-The solution implements the required account operations:
+<!-- Introduction paragraph explaining the repository purpose and origin -->
+This repository contains an implementation of the **Banking Service** technical test provided by **Skypay**.  It implements the required account operations:
+<!-- List of core functionalities implemented -->
 - Deposit
 - Withdraw
 - Print a bank statement
 
-**Implemented by: Mohamed Amine Ezzaouia**
+Implemented by: Mohamed Amine Ezzaouia
 
 ---
 
-<!-- Section describing the public interface -->
+<!-- ============================================ -->
+<!-- PUBLIC INTERFACE SECTION -->
+<!-- ============================================ -->
+
 ## Public Interface
 
-<!-- Explanation that the original interface requirements are maintained -->
 The implementation respects the required interface:
 
-<!-- Code block showing the AccountService interface definition -->
+<!-- Code block displaying the AccountService interface contract -->
 ```java
 public interface AccountService {
     void deposit(int amount);
@@ -27,29 +31,63 @@ public interface AccountService {
     void printStatement();
 }
 ```
--> The public interface is unchanged.
+
+<!-- Confirmation statement emphasizing no changes to the public API -->
+This public interface is unchanged, as mandated by the specification.
+
+<!-- ============================================ -->
+<!-- IMPLEMENTATION DETAILS SECTION -->
+<!-- ============================================ -->
 
 ## Implementation Summary
 
-<!-- List of technical choices made in the implementation -->
-- Transactions are stored using an ArrayList
-- Amounts are handled as int
-- Each transaction records its date, amount, and resulting balance
-- Dates are obtained using LocalDate.now()
-- Statements are printed in reverse chronological order
+<!-- List of key technical decisions and implementation details -->
 
-## Run
+*Transactions are stored in an ArrayList.
+*Monetary amounts are handled as int.
+*Each transaction records its date, amount and resulting balance.
+*Statements are printed in reverse chronological order, following the desired behaviour.
+*Invalid inputs and insufficient balance conditions throw exceptions, as required.
 
-<!-- Command to compile Java source files into the 'out' directory -->
+<!-- ============================================ -->
+<!-- DATE HANDLING EXPLANATION SECTION -->
+<!-- ============================================ -->
+
+## Date handling
+
+<!-- Detailed explanation of the clock abstraction design decision -->
+The solution uses a Clock abstraction (with SystemClock for production and StubClock for tests) to obtain transaction dates. This keeps the public interface simple and decouples business logic from the system clock. It also makes acceptance tests deterministic and easier to implement.
+
+<!-- Discussion of alternative approach considered -->
+An alternative approach would have been to overload deposit and withdraw with a LocalDate parameter (e.g. deposit(int amount, LocalDate date)). While functional, this directly couples date handling to business operations. The clock‑based design was chosen for better separation of concerns and testability.
+
+<!-- ============================================ -->
+<!-- EXECUTION INSTRUCTIONS SECTION -->
+<!-- ============================================ -->
+
+## How to Run
+
+<!-- Step 1: Compilation instruction -->
+Compile the project:
+
+<!-- Command to compile all Java source files into the 'out' directory -->
 ```bash
 javac -d out src/*.java
 ```
 
-<!-- Command to execute the Main class from the compiled output -->
+<!-- Step 2: Execution instruction -->
+Run the program:
+
+<!-- Command to execute the Main class with proper classpath -->
 ```bash
 java -cp out Main
 ```
 
-<!-- Final section with additional information about the project -->
+<!-- ============================================ -->
+<!-- ADDITIONAL NOTES SECTION -->
+<!-- ============================================ -->
+
 ## Notes
+
+<!-- Final statement about project goals and design principles -->
 The implementation focuses on correctness, simplicity, and compliance with the provided specifications.
