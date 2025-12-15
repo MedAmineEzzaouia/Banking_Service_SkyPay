@@ -62,6 +62,15 @@ The solution uses a Clock abstraction (with SystemClock for production and StubC
 An alternative approach would have been to overload deposit and withdraw with a LocalDate parameter (e.g. deposit(int amount, LocalDate date)). While functional, this directly couples date handling to business operations. The clock‑based design was chosen for better separation of concerns and testability.
 
 <!-- ============================================ -->
+<!-- CLASS DIAGRAM SECTION -->
+<!-- ============================================ -->
+
+![Banking Service - Class Diagram](docs/class-diagram.png)
+The diagram shows the core structure of the Banking Service.
+Account implements the AccountService interface and manages a collection of Transaction objects.
+Date management is delegated to a Clock abstraction, with SystemClock for production usage and StubClock for deterministic testing.
+
+<!-- ============================================ -->
 <!-- EXECUTION INSTRUCTIONS SECTION -->
 <!-- ============================================ -->
 
